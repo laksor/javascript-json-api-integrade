@@ -8,7 +8,7 @@ const displayQuotes = quote => {
     quoteelement.innerText = quote.quote;
 }
 
-// country
+// showing country
 
 const loadCountry = () => {
     fetch('https://restcountries.com/v3.1/all')
@@ -32,13 +32,14 @@ const displayCountry = counties => {
     });
 }
 
+// showing details
 const loadName = capital=> {
     const url = `https://restcountries.com/v3.1/capital/${capital}`;
     fetch(url)
     .then(res => res.json())
-    .then(data => displayDet(data[0]))
+    .then(data => displayDetails(data[0]))
 }
-const displayDet = country => {
+const displayDetails = country => {
     const countryDiv = document.getElementById('dit');
     countryDiv.classList.add('country');
         const div = document.createElement('div');
