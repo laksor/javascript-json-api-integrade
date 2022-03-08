@@ -19,10 +19,36 @@ loadCountry();
 
 const displayCountry = counties => {
     const countryDiv = document.getElementById('div');
+    countryDiv.classList.add('country');
     counties.forEach(country => {
-        const h3 = document.createElement('h3');
-        h3.innerText = country.capital;
-        countryDiv.appendChild(h3);
+        const div = document.createElement('div');
+        div.classList.add('diva');
+        div.innerHTML = `
+            <h3>${country.name}</h3>
+            <p>${country.capital}</p>
+            <button onclick="loadName('${country.capital}')" >Details</button>
+        `;
+        countryDiv.appendChild(div);
     });
 }
 
+const loadName = capital=> {
+    const url = `https://restcountries.com/v3.1/capital/${capital}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayDet(data[0]))
+}
+const displayDet = country => {
+    const countryDiv = document.getElementById('dit');
+    countryDiv.classList.add('country');
+        const div = document.createElement('div');
+        div.classList.add('diva');
+        div.innerHTML = `
+            <h3>${country.capital}</h3>
+            <p>${country.region}</p>
+            <p>${country.population}</p>
+            <img width="200px" src="${country.flags.png}">
+            <p>${country.continents}</p>
+        `;
+        countryDiv.appendChild(div);
+}
